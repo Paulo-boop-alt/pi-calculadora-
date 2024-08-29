@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Seno, Cosseno e Tangente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+            margin: 5px;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculadora de Seno, Cosseno e Tangente</h1>
+    <p>Digite o ângulo em graus:</p>
+    <input type="number" id="angulo" placeholder="Ângulo em graus">
+    <br>
+    <button onclick="calcular()">Calcular</button>
+
+    <div class="result">
+        <p id="seno"></p>
+        <p id="cosseno"></p>
+        <p id="tangente"></p>
+    </div>
+
+    <script>
+        function calcular() {
+            let angulo = parseFloat(document.getElementById('angulo').value);
+            if (isNaN(angulo)) {
+                alert("Por favor, insira um número válido.");
+                return;
+            }
+
+            // Convertendo para radianos
+            let radianos = angulo * Math.PI / 180;
+
+            // Calculando seno e cosseno
+            let seno = Math.sin(radianos).toFixed(4);
+            let cosseno = Math.cos(radianos).toFixed(4);
+
+            // Exibindo seno e cosseno
+            document.getElementById('seno').innerText = "Seno: " + seno;
+            document.getElementById('cosseno').innerText = "Cosseno: " + cosseno;
+
+            // Calculando e exibindo tangente, verificando se cosseno é zero
+            if (Math.abs(cosseno) < 1e-10) { // Considerando cosseno muito pequeno como zero
+                document.getElementById('tangente').innerText = "Tangente: indefinida";
+            } else {
+                let tangente = Math.tan(radianos).toFixed(4);
+                document.getElementById('tangente').innerText = "Tangente: " + tangente;
+            }
+        }
+    </script>
+</body>
+</html>
